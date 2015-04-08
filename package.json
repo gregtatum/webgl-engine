@@ -1,0 +1,26 @@
+{
+  "name": "webgl-engine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:create-shader": "open http://localhost:9966/ && budo examples/create-shader.js --live --verbose | garnish"
+  },
+  "author": "Greg Tatum",
+  "devDependencies": {
+    "babelify": "^6.0.2",
+    "brfs": "^1.4.0",
+    "browserify": "^9.0.7",
+    "budo": "^2.1.5",
+    "dom-css": "^1.1.1",
+    "dom-event": "0.0.5",
+    "dom-tree": "0.0.1",
+    "fs": "0.0.2",
+    "lodash": "^3.6.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "brfs"
+    ]
+  }
+}
