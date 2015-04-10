@@ -15,7 +15,9 @@
     "dom-event": "0.0.5",
     "dom-tree": "0.0.1",
     "fs": "0.0.2",
-    "lodash": "^3.6.0"
+    "gl-matrix": "^2.1.0",
+    "lodash": "^3.6.0",
+    "poem-loop": "^1.0.4"
   },
   "browserify": {
     "transform": [
