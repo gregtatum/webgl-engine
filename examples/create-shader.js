@@ -1,12 +1,12 @@
+require('../lib/utils/console-tools')
+
 var CanvasManager = require('../lib/canvas')
 var ShaderTools = require('../lib/shader')
 var BufferTools = require('../lib/buffers')
 var Fs = require('fs')
 var Camera = require('../lib/camera')
 var Model = require('../lib/model')
-require('../lib/utils/console-tools')
 var CreateLoop = require('poem-loop')
-
 
 var canvasManager = CanvasManager()
 var gl = canvasManager.gl
@@ -32,9 +32,9 @@ var shader = shaderTools.setup( shaderProgram, {
 				-1,  0, -1,
 				 0, -1, -1,
 				 1,  1, -1,
-				-1,  0, -2,
-				 0, -1, -2,
-				 1,  1, -2
+				-1,  0, 1,
+				 0, -1, 1,
+				 1,  1, 1
 			])),
 			bufferType: gl.ARRAY_BUFFER,
 			dataType: gl.FLOAT,
@@ -71,9 +71,14 @@ var shader = shaderTools.setup( shaderProgram, {
 
 loop.emitter.on('update', function() {
 	
+	
 	model.updateModelView( camera.view )
 	shader.bind()
+	// gl.enable( gl.CULL_FACE )
+	gl.enable( gl.DEPTH_TEST )
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	gl.drawArrays( gl.TRIANGLES, 0, 9 )
+	
 })
 loop.start()
 
