@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start:create-shader": "open http://localhost:9966/ && budo examples/create-shader.js --live --verbose | garnish"
+    "draw-arrays": "open http://localhost:9966/ && budo examples/draw-arrays.js --live --verbose | garnish",
+    "draw-elements": "open http://localhost:9966/ && budo examples/draw-elements.js --live --verbose | garnish"
   },
   "author": "Greg Tatum",
   "devDependencies": {

@@ -2,6 +2,10 @@
 
 A toy WebGL engine to recreate the wheel.
 
-## Start example
+## Start examples
 
-	npm run start:create-shader
+You need [npm](https://www.npmjs.com/) installed and then from the command line run:
+
+	npm run draw-arrays
+
+	npm run draw-elements

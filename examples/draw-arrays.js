@@ -10,8 +10,8 @@ var CreateLoop = require('poem-loop')
 
 var canvasManager = CanvasManager()
 var gl = canvasManager.gl
-var shaderTools = ShaderTools.bind(gl)
-var bufferTools = BufferTools.bind(gl)
+var shaderTools = ShaderTools.wrapGl(gl)
+var bufferTools = BufferTools.wrapGl(gl)
 var model = Model()
 var camera = Camera( gl )
 var loop = CreateLoop()
@@ -22,36 +22,18 @@ var shaderProgram = shaderTools.createProgram(
 	Fs.readFileSync( __dirname + "/../lib/shaders/model.frag", 'utf8')
 )
 
+var triangles = require('./models/triangles.json')
+
 var shader = shaderTools.setup( shaderProgram, {
 	attributes: {
 		position: {
-			buffer: bufferTools.create( new Float32Array([
-				-1,  0, 0,
-				 0, -1, 0,
-				 1,  1, 0,
-				-1,  0, -1,
-				 0, -1, -1,
-				 1,  1, -1,
-				-1,  0, 1,
-				 0, -1, 1,
-				 1,  1, 1
-			])),
+			buffer: bufferTools.create( new Float32Array( triangles.positions )),
 			bufferType: gl.ARRAY_BUFFER,
 			dataType: gl.FLOAT,
 			size: 3
 		},
 		color: {
-			buffer: bufferTools.create( new Float32Array([
-				 1.0,  0.0, 0.0,
-				 1.0,  1.0, 0.0,
-				 1.0,  0.0, 1.0,
-				 0.0,  1.0, 0.0,
-				 1.0,  1.0, 0.0,
-				 0.0,  1.0, 1.0,
-				 0.0,  0.0, 1.0,
-				 1.0,  0.0, 1.0,
-				 0.0,  1.0, 1.0
-			])),
+			buffer: bufferTools.create( new Float32Array( triangles.colors )),
 			bufferType: gl.ARRAY_BUFFER,
 			dataType: gl.FLOAT,
 			size: 3
