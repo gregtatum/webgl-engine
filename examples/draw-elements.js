@@ -2,19 +2,23 @@ require('../lib/utils/console-tools')
 
 var CanvasManager = require('../lib/canvas')
 var ShaderTools = require('../lib/shader')
-var BufferTools = require('../lib/buffers')
 var Fs = require('fs')
 var Camera = require('../lib/camera')
 var Model = require('../lib/model')
 var CreateLoop = require('poem-loop')
 
+// The basic init
 var canvasManager = CanvasManager()
 var gl = canvasManager.gl
 var shaderTools = ShaderTools.wrapGl(gl)
-var bufferTools = BufferTools.wrapGl(gl)
 var model = Model()
 var camera = Camera( gl )
 var loop = CreateLoop()
+
+// GL settings
+gl.enable( gl.CULL_FACE )
+gl.enable( gl.DEPTH_TEST )
+gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 // Build shader
 var shaderProgram = shaderTools.createProgram(
@@ -26,22 +30,15 @@ var box = require('./models/box.json')
 
 var shader = shaderTools.setup( shaderProgram, {
 	
-	elements: bufferTools.create(
-		new Uint16Array( box.cells ),
-		gl.ELEMENT_ARRAY_BUFFER
-	),
+	elements: box.cells,
 	
 	attributes: {
 		position: {
-			buffer: bufferTools.create( new Float32Array( box.positions )),
-			bufferType: gl.ARRAY_BUFFER,
-			dataType: gl.FLOAT,
+			values: box.positions,
 			size: 3
 		},
 		color: {
-			buffer: bufferTools.create( new Float32Array( box.colors ) ),
-			bufferType: gl.ARRAY_BUFFER,
-			dataType: gl.FLOAT,
+			values: box.colors,
 			size: 4
 		}
 	},
@@ -61,14 +58,11 @@ loop.emitter.on('update', function() {
 	
 	model.updateModelView( camera.view )
 	shader.bind()
-	gl.enable( gl.CULL_FACE )
-	gl.enable( gl.DEPTH_TEST )
-	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-	gl.drawElements( gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0 )
+		
+	shader.draw() // gl.drawElements( gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0 )
 	
 	shader.unbind()
 	
 })
-loop.start()
 
-// debugger
+loop.start()

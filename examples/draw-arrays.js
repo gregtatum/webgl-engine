@@ -27,15 +27,11 @@ var triangles = require('./models/triangles.json')
 var shader = shaderTools.setup( shaderProgram, {
 	attributes: {
 		position: {
-			buffer: bufferTools.create( new Float32Array( triangles.positions )),
-			bufferType: gl.ARRAY_BUFFER,
-			dataType: gl.FLOAT,
+			values: triangles.positions,
 			size: 3
 		},
 		color: {
-			buffer: bufferTools.create( new Float32Array( triangles.colors )),
-			bufferType: gl.ARRAY_BUFFER,
-			dataType: gl.FLOAT,
+			values: triangles.colors,
 			size: 3
 		}
 	},
@@ -53,13 +49,13 @@ var shader = shaderTools.setup( shaderProgram, {
 
 loop.emitter.on('update', function() {
 	
-	
 	model.updateModelView( camera.view )
 	shader.bind()
 	// gl.enable( gl.CULL_FACE )
 	gl.enable( gl.DEPTH_TEST )
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-	gl.drawArrays( gl.TRIANGLES, 0, 9 )
+	// gl.drawArrays( gl.TRIANGLES, 0, 9 )
+	shader.draw()
 	
 })
 loop.start()

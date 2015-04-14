@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "draw-arrays": "open http://localhost:9966/ && budo examples/draw-arrays.js --live --verbose | garnish",
-    "draw-elements": "open http://localhost:9966/ && budo examples/draw-elements.js --live --verbose | garnish"
+    "draw-elements": "open http://localhost:9966/ && budo examples/draw-elements.js --live --verbose | garnish",
+    "draw-boxes": "open http://localhost:9966/ && budo examples/draw-boxes.js --live --verbose | garnish"
   },
   "author": "Greg Tatum",
   "devDependencies": {
