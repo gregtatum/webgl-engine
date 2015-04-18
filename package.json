@@ -16,6 +16,7 @@
     "browserify": "^9.0.7",
     "budo": "^3.0.4",
     "dom-css": "^1.1.1",
+    "geo-3d-box": "https://github.com/TatumCreative/geo-3d-box",
     "dom-event": "0.0.5",
     "dom-tree": "0.0.1",
     "fs": "0.0.2",
