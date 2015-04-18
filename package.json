@@ -5,14 +5,16 @@
   "scripts": {
     "draw-arrays": "open http://localhost:9966/ && budo examples/draw-arrays.js --live --verbose | garnish",
     "draw-elements": "open http://localhost:9966/ && budo examples/draw-elements.js --live --verbose | garnish",
-    "draw-boxes": "open http://localhost:9966/ && budo examples/draw-boxes.js --live --verbose | garnish"
+    "draw-boxes": "open http://localhost:9966/ && budo examples/draw-boxes.js --live --verbose | garnish",
+    "draw-textures": "open http://localhost:9966/ && budo examples/draw-textures.js --live --verbose | garnish",
+    "draw-boxes-dynamic": "open http://localhost:9966/ && budo examples/draw-boxes-dynamic.js --live --verbose | garnish"
   },
   "author": "Greg Tatum",
   "devDependencies": {
     "babelify": "^6.0.2",
     "brfs": "^1.4.0",
     "browserify": "^9.0.7",
-    "budo": "^2.1.5",
+    "budo": "^3.0.4",
     "dom-css": "^1.1.1",
     "dom-event": "0.0.5",
     "dom-tree": "0.0.1",

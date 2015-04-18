@@ -6,6 +6,7 @@ var Fs = require('fs')
 var Camera = require('../lib/camera')
 var Model = require('../lib/model')
 var CreateLoop = require('poem-loop')
+var TrianglesToLines = require('../lib/utils/triangles-to-lines')
 
 // The basic init
 var canvasManager = CanvasManager()
@@ -28,17 +29,19 @@ var shaderProgram = shaderTools.createProgram(
 
 var box = require('./models/box.json')
 
-var shader = shaderTools.setup( shaderProgram, {
+var shader = shaderTools.setup({
 	
-	elements: box.cells,
+	program: shaderProgram,
+	
+	elements: TrianglesToLines( box.cells ),
 	
 	attributes: {
 		position: {
-			values: box.positions,
+			value: box.positions,
 			size: 3
 		},
 		color: {
-			values: box.colors,
+			value: box.colors,
 			size: 4
 		}
 	},
@@ -51,6 +54,10 @@ var shader = shaderTools.setup( shaderProgram, {
 			value: model.modelView,
 			type: "Matrix4fv"
 		}
+	},
+	
+	drawing: {
+		mode: gl.LINES
 	}
 })
 
@@ -58,9 +65,7 @@ loop.emitter.on('update', function() {
 	
 	model.updateModelView( camera.view )
 	shader.bind()
-		
 	shader.draw() // gl.drawElements( gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0 )
-	
 	shader.unbind()
 	
 })
